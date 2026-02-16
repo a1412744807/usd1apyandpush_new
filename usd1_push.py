@@ -185,7 +185,9 @@ def main():
 
 年化APY最高预估约{base_apy:.2f}%
 
-更新时间: {beijing_time} (北京时间)"""
+更新时间: {beijing_time} (北京时间)
+
+[刀哥推特](https://x.com/Web3Daoge1) | [理财监控看板](http://web3daoge.com/)"""
 
     print(message)
     print("\n" + "="*50)
