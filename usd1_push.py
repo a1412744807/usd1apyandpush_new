@@ -150,7 +150,7 @@ def format_number(num):
         return f"{num:,.0f}"
 
 def main():
-    print("正在获取资产持仓数据...")
+    print("正在获取币安WLFI持仓数据...")
 
     # 获取当前余额
     total = get_total_balance()
@@ -158,9 +158,8 @@ def main():
         print("获取余额失败")
         return
 
-    # 计算 APY
+    # 计算 APY（仅参照现货/资金账户年化APY）
     base_apy = (10_000_000 * 52) / total * 100
-    contract_apy = base_apy * 1.2
 
     # 获取昨日数据计算变动
     yesterday_balance = get_yesterday_balance()
@@ -180,13 +179,11 @@ def main():
     beijing_time = datetime.now(timezone(timedelta(hours=8))).strftime('%Y-%m-%d %H:%M')
 
     # 构建消息
-    message = f"""**资产活动年化利率更新**
+    message = f"""**币安WLFI和USD1活动年化利率更新**
 
-当前总持仓数量约为 **{format_number(total)}**，较昨日同期变动{change_text}。
+当前币安全网WLFI总持仓数量约为 **{format_number(total)}**，较昨日同期变动{change_text}。
 
-现货/资金账户年化APY **{base_apy:.2f}%**
-
-合约/杠杆账户年化APY **{contract_apy:.2f}%**
+年化APY最高预估约{base_apy:.2f}%
 
 更新时间: {beijing_time} (北京时间)"""
 
