@@ -101,13 +101,25 @@ def push_telegram(message):
         return
 
     url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
+    
+    # 创建 Inline Keyboard 按钮
+    keyboard = {
+        "inline_keyboard": [
+            [
+                {"text": "刀哥推特", "url": "https://x.com/Web3Daoge1"},
+                {"text": "理财监控看板", "url": "http://web3daoge.com/"}
+            ]
+        ]
+    }
+    
     for chat_id in TELEGRAM_CHAT_IDS:
         if not chat_id.strip():
             continue
         payload = {
             "chat_id": chat_id.strip(),
             "text": message,
-            "parse_mode": "Markdown"
+            "parse_mode": "Markdown",
+            "reply_markup": keyboard
         }
         try:
             resp = requests.post(url, json=payload, timeout=10)
@@ -185,9 +197,7 @@ def main():
 
 年化APY最高预估约{base_apy:.2f}%
 
-更新时间: {beijing_time} (北京时间)
-
-[刀哥推特](https://x.com/Web3Daoge1) | [理财监控看板](http://web3daoge.com/)"""
+更新时间: {beijing_time} (北京时间)"""
 
     print(message)
     print("\n" + "="*50)
