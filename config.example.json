@@ -1,0 +1,57 @@
+{
+  "config": {
+    "description": "本文件为配置示例，请根据实际情况修改，重要信息需通过环境变量传递",
+    "env_variables": {
+      "ETH_API_KEY": {
+        "description": "Etherscan API Key，用于查询ETH链余额",
+        "required": true,
+        "example": "YOUR_ETHERSCAN_API_KEY"
+      },
+      "TELEGRAM_BOT_TOKEN": {
+        "description": "Telegram 机器人 Token，从 @BotFather 获取",
+        "required": false,
+        "example": "YOUR_BOT_TOKEN"
+      },
+      "TELEGRAM_CHAT_IDS": {
+        "description": "Telegram 聊天ID列表，多个用逗号分隔",
+        "required": false,
+        "example": "YOUR_CHAT_ID1,YOUR_CHAT_ID2"
+      },
+      "QYWX_WEBHOOK": {
+        "description": "企业微信 Webhook 地址",
+        "required": false,
+        "example": "YOUR_QYWX_WEBHOOK_URL"
+      },
+      "GOOGLE_CREDENTIALS": {
+        "description": "Google Service Account JSON（整个JSON对象作为字符串）",
+        "required": false,
+        "example": "{\"type\":\"service_account\",\"project_id\":\"...\",\"private_key_id\":\"...\",\"private_key\":\"...\",\"client_email\":\"...\",\"client_id\":\"...\",\"auth_uri\":\"...\",\"token_uri\":\"...\",\"auth_provider_x509_cert_url\":\"...\",\"client_x509_cert_url\":\"...\"}"
+      }
+    },
+    "local_config": {
+      "CONTRACT": {
+        "description": "合约地址（通常不需要修改）",
+        "value": "0x8d0D000Ee44948FC98c9B98A4FA4921476f08B0d"
+      },
+      "BSC_RPC_URL": {
+        "description": "BSC RPC端点（通常不需要修改）",
+        "value": "https://bsc-dataseed.binance.org/"
+      },
+      "SHEET_URL": {
+        "description": "Google Sheets 链接（update_apy.py需要）",
+        "value": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/edit?usp=sharing"
+      },
+      "TARGET_CELL": {
+        "description": "Google Sheet 目标单元格",
+        "value": "C4"
+      },
+      "WALLETS": {
+        "description": "监控的钱包地址列表",
+        "example": [
+          "0xF977814e90dA44bFA03b6295A0616a897441aceC",
+          "0x5a52E96BAcdaBb82fd05763E25335261B270Efcb"
+        ]
+      }
+    }
+  }
+}

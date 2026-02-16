@@ -1,0 +1,43 @@
+name: Asset Push
+
+on:
+  schedule:
+    # 北京时间 8:00 = UTC 0:00
+    - cron: '0 0 * * *'
+    # 北京时间 16:00 = UTC 8:00
+    - cron: '0 8 * * *'
+    # 北京时间 24:00 = UTC 16:00
+    - cron: '0 16 * * *'
+  workflow_dispatch:  # 手动触发
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run Asset Push
+        env:
+          ETH_API_KEY: ${{ secrets.ETH_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_IDS: ${{ secrets.TELEGRAM_CHAT_IDS }}
+          QYWX_WEBHOOK: ${{ secrets.QYWX_WEBHOOK }}
+        run: python usd1_push.py
+
+      - name: Commit history
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add history.json || true
+          git diff --staged --quiet || git commit -m "Update history data"
+          git push || true
